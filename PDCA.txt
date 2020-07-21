@@ -1,0 +1,49 @@
+printReceipt()
+P: 5min
+D: 10min
+C: 屡清楚逻辑花费了点时间
+A:  按照逻辑将字符串拼接出来
+
+createReceipt()
+P: 3min
+D: 6min
+C: 使用反引号拼接出现问题，对比后，改用字符串拼接就解决了
+A: 将拼接好的全部小计和获得的总价拼接在一起返回
+
+arrayDeDuplication()
+P:  2min 
+D:  2min
+C:  想好怎么去重就很快写完了
+A:  数组去重
+
+decodeBarcodes()
+P: 7min
+D: 12min
+C: 思考需要返回的内容里要不要将其他内容先加上，后面选择加上了方便其他方法使用,缕清逻辑
+A: 返回某个商品的小计需要的信息
+
+CreateAllSubtotal()
+P:  5min
+D:  5min
+C:  按照需要拼接的小计信息进行正确拼接
+A:  将所有小计拼接在一起
+
+subtotal()
+P: 7min  
+D: 9min 
+C: 遍历的时候需要更改数量和对应商品小计价格，使用map无法同时返回两个的计算结果，所以采用for循环解决
+A: 将decodeBarcodes返回的小计信息的JSON进行一个遍历并计算出还未得出的小计信息
+
+getTotalPrice()
+P:  5min  
+D:  4min
+C:  对JSON数据进行遍历，没有什么复杂的逻辑
+A:  对subtotal()方法返回的JSON数据进行遍历并计算出商品的总价
+
+loadAllItem()
+P:  1min
+D:  1min
+C:  拿到README文件中的数据正确返回
+A:  返回所有商品的信息
+
+
