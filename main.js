@@ -1,28 +1,41 @@
 function printReceipt(barcodes) {
     const allItem = loadAllItem()
-    const itemInBarcodes = arrayDeDuplication(barcodes)
+    const itemInBarcodes = arrayDeDuplication(barcodes, allItem)
     const itemInBarcodesgetName = decodeBarcodes(itemInBarcodes, allItem)
     const allSubtotalObj = subtotal(barcodes, itemInBarcodesgetName)
-    const allSubtotalStr = CreateAllSubtotal(allSubtotalObj)
+    const allSubtotalString = CreateAllSubtotal(allSubtotalObj)
     const totalPrice = getTotalPrice(allSubtotalObj)
-    console.log(createReceipt(allSubtotalStr, totalPrice))
+    console.log(createReceipt(allSubtotalString, totalPrice))
 }
 
 function createReceipt(allSubtotalStr, totalPrice) {
-    let str = "\n***<store earning no money>Receipt ***\n" + allSubtotalStr + "----------------------\n" + "Total: " + totalPrice+ " (yuan)\n" + "**********************"
+    /* let str = "\n***<store earning no money>Receipt ***\n" + allSubtotalStr + "----------------------\n" + "Total: " + totalPrice+ " (yuan)\n" + "**********************" */
+    let str = `\n***<store earning no money>Receipt ***\n${allSubtotalStr}----------------------\nTotal: ${totalPrice} (yuan)\n**********************`
     return str
 }
 
 //数组去重
-function arrayDeDuplication(array) {
-    let arr = []
+function arrayDeDuplication(array, allItem) {
+    let newArray = []
     array.map(item => {
-        if(arr.indexOf(item) < 0) {
-            arr.push(item)
+        if(newArray.indexOf(item) < 0) {
+            newArray.push(item)
         }
     })
-    return arr;
+    newArray = checkBarcodeIsValid(newArray, allItem)
+    return newArray;
 } 
+
+//判断barcode是否有效
+function checkBarcodeIsValid(barcodes, allItem) {
+    barcodes.map(barcode => {
+        let index = allItem.findIndex(example => example.barcode == barcode)
+        if( index < 0) {
+            barcodes.splice(index, 1)
+        }
+    })
+    return barcodes
+}
 
 function decodeBarcodes(barcodes, allItem) {
     let subtotalMessage = []
@@ -44,16 +57,12 @@ function CreateAllSubtotal(subtotal) {
     return allSubtotal
 }
 
-/* Name: Coca-Cola, Quantity: 5, Unit price: 3 (yuan), Subtotal: 15 (yuan) */
-function subtotal(itemInBarcodes, allSubtotal) {
-    itemInBarcodes.map(barcode => {
-        for(let i = 0; i < allSubtotal.length; i++) {
-            if(barcode == allSubtotal[i].barcode) {
-                item = allSubtotal[i]
-                item.Quantity += 1
-                item.subtotal = item.price * item.Quantity
-            }
-        }
+//使用find()实现
+function subtotal(barcodes, allSubtotal) {
+    barcodes.map(barcode => {
+        let index = allSubtotal.findIndex(item => item.barcode == barcode)
+        allSubtotal[index].Quantity += 1
+        allSubtotal[index].subtotal = allSubtotal[index].price * allSubtotal[index].Quantity
     })
     return allSubtotal
 }

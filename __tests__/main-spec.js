@@ -13,7 +13,6 @@ describe('print receipt', () => {
                 'ITEM000001',
                 'ITEM000004'
             ];
-
             const expectReceipt = `
 ***<store earning no money>Receipt ***
 Name: Coca-Cola, Quantity: 5, Unit price: 3 (yuan), Subtotal: 15 (yuan)
@@ -22,12 +21,12 @@ Name: Battery, Quantity: 1, Unit price: 2 (yuan), Subtotal: 2 (yuan)
 ----------------------
 Total: 23 (yuan)
 **********************`
-
+            
 
             console.log = jest.fn();
 
             main.printReceipt(barcodes);
-
             expect(console.log).toHaveBeenCalledWith(expectReceipt);
         });
 });
+
