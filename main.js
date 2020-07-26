@@ -9,12 +9,10 @@ function printReceipt(barcodes) {
 }
 
 function createReceipt(allSubtotalStr, totalPrice) {
-    /* let str = "\n***<store earning no money>Receipt ***\n" + allSubtotalStr + "----------------------\n" + "Total: " + totalPrice+ " (yuan)\n" + "**********************" */
     let str = `\n***<store earning no money>Receipt ***\n${allSubtotalStr}----------------------\nTotal: ${totalPrice} (yuan)\n**********************`
     return str
 }
 
-//数组去重
 function arrayDeDuplication(array, allItem) {
     let newArray = []
     array.map(item => {
@@ -26,7 +24,6 @@ function arrayDeDuplication(array, allItem) {
     return newArray;
 } 
 
-//判断barcode是否有效
 function checkBarcodeIsValid(barcodes, allItem) {
     barcodes.map(barcode => {
         let index = allItem.findIndex(example => example.barcode == barcode)
@@ -57,7 +54,6 @@ function CreateAllSubtotal(subtotal) {
     return allSubtotal
 }
 
-//使用find()实现
 function subtotal(barcodes, allSubtotal) {
     barcodes.map(barcode => {
         let index = allSubtotal.findIndex(item => item.barcode == barcode)
@@ -67,7 +63,6 @@ function subtotal(barcodes, allSubtotal) {
     return allSubtotal
 }
 
-/* Total: 23 (yuan) */
 function getTotalPrice(allSubtotal) {
     let total = 0;
     allSubtotal.map(item => {
@@ -76,7 +71,6 @@ function getTotalPrice(allSubtotal) {
     return total
 }
 
-//获取商品信息
 function loadAllItem() {
     const allItem = [
         {
